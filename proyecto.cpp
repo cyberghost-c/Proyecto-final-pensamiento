@@ -3,11 +3,10 @@
 using namespace std;
 void captura(); //Captura tipo de usuario
 void terapeuta(string x[], int especialidad); //Interfaz de terapeuta
-void paciente(); //Interfaz de paciente
-void ejecucion_ejercicio(int pos, int especialidad); //Interfaz para que el paciente responda si ya realizo la terapia y las obsevaciones de la misma
-void tratamiento(int id_paciente, int especialidad_terapeuta); //Interfaz para asignación de terapias
+void paciente(); //Interfaz de pacientevoid ejecucion_ejercicio(int pos, int especialidad); //Interfaz para que el paciente responda si ya realizo la terapia y las obsevaciones de la misma
+void tratamiento(int id_paciente, int especialidad_terapeuta); //Interfaz para asignaci�n de terapias
 void usuarios_sistema(); //Ciclo Do While para aumentar contador de la lista a[X]
-void feed_back(int numero, int especialidad); //El paciente introducirá observaciones sobre su tratamiento
+void feed_back(int numero, int especialidad); //El paciente introducir� observaciones sobre su tratamiento
 string a[500], end="\n"; 
 string feedback[500];
 int especialidad, cont;
@@ -95,7 +94,7 @@ void paciente()
         {
         	cout<<"Que especialista quiere ver: "<<endl<<" 1.Ortopedica "<<endl<<" 2.Traumatologica "<<endl<<" 3.Deportiva "<<endl<<" 4.Geriatrica "<<endl<<" 5.Neurologica "<<endl;
             cin>>especialidad;
-            cout<<"Quiere volver a ser evaluado?"<<endl;
+            cout<<"Quiere volver a ser evaluado?(s/n)"<<endl;
             cin>>rta4;
         	if(rta4=='s')
             {
@@ -132,7 +131,7 @@ void paciente()
 void ejecucion_ejercicio(int n_paciente, int especialidad)
 {
     char resp;
-    string alfa;
+    string alfa, beta ;
     cout<<"Desea ver su historial clinico?(s/n)"<<endl;
     cin>>resp; cout<<endl;
     if(resp=='s')
@@ -146,6 +145,9 @@ void ejecucion_ejercicio(int n_paciente, int especialidad)
             cout<<feedback[n_paciente]<<endl;
             cout<<"Escriba sus observaciones con relacion a la terapia enviada: "<<endl;
             cin>>alfa; cout<<endl;
+            cout<<"Escriba en una escala del 1 al 5 el dolor presentado"<<endl;
+            cin>>beta; cout<<endl;
+            alfa=alfa+" El nivel de dolor fue: "+beta+end;
             feedback[n_paciente]=feedback[n_paciente]+alfa+end; 
             feed_back(n_paciente, especialidad); //Feedback hace parte de la interfaz de Terapeuta
         }
@@ -166,6 +168,9 @@ void ejecucion_ejercicio(int n_paciente, int especialidad)
             cout<<feedback[n_paciente]<<endl;
             cout<<"Escriba sus observaciones con relacion a la terapia enviada: "<<endl;
             cin>>alfa; cout<<endl;
+            cout<<"Escriba en una escala del 1 al 5 el dolor presentado"<<endl;
+            cin>>beta; cout<<endl;
+            alfa=alfa+" El nivel de dolor fue: "+beta+end;
             feedback[n_paciente]=feedback[n_paciente]+alfa+end; 
             feed_back(n_paciente, especialidad); //Feedback hace parte de la interfaz de Terapeuta
         }
@@ -181,17 +186,20 @@ void ejecucion_ejercicio(int n_paciente, int especialidad)
 void feed_back( int n_paciente, int especialidad)
 {
     char rta, rta2;
-    string Obser;
+    string Obser, beta;
     cout<<"----Interfaz de terapeuta----"<<endl;
     cout<<"El paciente identificado con el ID "<<n_paciente<<" ha dejado la siguiente observacion: "<<endl;
     cout<<feedback[n_paciente]<<endl;
-    cout<<"Desea agregar alguna observacion?(s/n)"<<endl;
+    cout<<"Desea agregar alguna Valoracion?(s/n)"<<endl;
     cin>>rta2;
     if(rta2=='s')
     {
-        cout<<"Digite la observacion a continuacion: "<<endl;
+        cout<<"Digite la observacion a continuacion: "<<endl; 
+        cout<<"No olvide evaluar lo siguiente dentro de sus observaciones: (porcentaje de: fuerza, movilidad y flexibilidad)  "<<endl;
         cin>>Obser;
-        Obser=Obser+" "+end;
+        cout<<"En una escala del 1 al 5, la mejoria del paciente con respecto al principio fue: "<<endl;
+        cin>>beta;
+        Obser=Obser+" El nivel mejoria fue:"+beta+end;
         feedback[n_paciente]=feedback[n_paciente]+"Valoracion del Terapeuta: "+Obser+ end;
         cout<<"Desea editar las terapias proporcionadas a este paciente?(s/n)"<<endl;
         cin>>rta;
@@ -203,7 +211,6 @@ void feed_back( int n_paciente, int especialidad)
         {
             paciente();
         } 
-
     }
     else
     {
@@ -248,7 +255,7 @@ void terapeuta(string historias[], int area)
             }
             else
             {
-                cout<<"Desea hacer observaciones del paciente?(s/n)"<<endl;
+                cout<<"Desea hacerle valoraciones al paciente?(s/n)"<<endl;
                 cin>>ita;
                 if(ita=='s')
                 {
@@ -256,7 +263,7 @@ void terapeuta(string historias[], int area)
 				}
                 else
                 {
-                    paciente();
+                    usuarios_sistema();
                 }
             }
         }
@@ -400,10 +407,10 @@ void tratamiento(int id_unico, int especialidad)
     case 1:
         
         z=" 1.Equilibrio en una pierna mientras toca el piso * repeticiones: "+tera1;
-        b=" 2.Rotación interna de hombros o musmo con codo o rodilla a 90 grados * repeticiones: "+tera2; 
-        c=" 3.Reeducación postular, mover hombros hacia atrás * repeticiones: "+tera3;
+        b=" 2.Rotacion interna de hombros o musmo con codo o rodilla a 90 grados * repeticiones: "+tera2; 
+        c=" 3.Reeducacion postular, mover hombros hacia atras * repeticiones: "+tera3;
         d=" 4.Halar una liga con el antebrazo o pierna (bilateralmente) * repeticiones: "+tera4;
-        e=" 5.Preción hacia el centro en codo o rodilla * repeticiones: "+tera5;
+        e=" 5.Precion hacia el centro en codo o rodilla * repeticiones: "+tera5;
         cout<<z<<endl<<b<<endl<<c<<endl<<d<<endl<<e<<endl;
         terapia=" ";
         do
@@ -421,14 +428,14 @@ void tratamiento(int id_unico, int especialidad)
 			{
                 cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera2; cout<<endl;
-                b=" 2.Rotación interna de hombros o musmo con codo o rodilla a 90 grados * repeticiones: "+tera2;
+                b=" 2.Rotacion interna de hombros o musmo con codo o rodilla a 90 grados * repeticiones: "+tera2;
 				terapia=terapia+" "+end+b;
 			}
 			else if(rta==3)
 			{
                 cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera3; cout<<endl;
-                c=" 3.Reeducación postular, mover hombros hacia atrás * repeticiones: "+tera3;
+                c=" 3.Reeducacion postular, mover hombros hacia atrás * repeticiones: "+tera3;
 				terapia=terapia+" "+end+c;
 			}
 			else if(rta==4)
@@ -442,7 +449,7 @@ void tratamiento(int id_unico, int especialidad)
 			{
                 cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera5; cout<<endl;
-                e=" 5.Preción hacia el centro en hombro o rodilla * repeticiones: "+tera5;
+                e=" 5.Precion hacia el centro en hombro o rodilla * repeticiones: "+tera5;
 				terapia=terapia+" "+end+e;
 			}
             cout<<endl<<endl<<"Quiere asignar mas terapias?(s/n)"<<endl;
@@ -631,35 +638,35 @@ void tratamiento(int id_unico, int especialidad)
             {
             	cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera1; cout<<endl;
-                z=" 1.Buscar parejas de cartas * repeticiones: "+tera1;
+                z=" 1.Ejercicio Neurologico * repeticiones: "+tera1;
             	terapia=terapia+" "+end+z;
 			}
 			else if(rta==2)
 			{
 				cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera1; cout<<endl;
-                b=" 2.Sopa de letras * cantidad : "+tera2;
+                b=" 2.Ejercicio Neurologico * repeticiones: "+tera2;
             	terapia=terapia+" "+end+z;
 			}
 			else if(rta==3)
 			{
 				cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera1; cout<<endl;
-                c=" 3.Ejercicios de memoria * minutos: "+tera3;
+                c=" 3.Ejercicio Neurologico * repeticiones: "+tera3;
             	terapia=terapia+" "+end+z;
 			}
 			else if(rta==4)
 			{
 				cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera1; cout<<endl;
-                d=" 4.Desarrollar rompe-cabezas * repeticiones: "+tera4;
+                d=" 4.Ejercicio Neurologico * repeticiones: "+tera4;
             	terapia=terapia+" "+end+z;
 			}
 			else if(rta==5)
 			{
 				cout<<"Digite la cantidad de repeticiones: "<<endl;
                 cin>>tera1; cout<<endl;
-                e=" 5.Planas en una hoja * repeticiones: "+tera5;
+                e=" 5.Ejercicio Neurologico * repeticiones: "+tera5;
             	terapia=terapia+" "+end+z;
 			}
             cout<<endl<<endl<<"Quiere asignar mas terapias?(s/n)"<<endl;
@@ -674,4 +681,3 @@ void tratamiento(int id_unico, int especialidad)
     }
     
 }
-
